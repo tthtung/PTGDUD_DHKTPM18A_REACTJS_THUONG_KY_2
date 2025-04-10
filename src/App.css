@@ -1,0 +1,36 @@
+.custom-container {
+  display: grid;
+  grid-template-areas:
+    "menu header"
+    "menu content"
+    "menu table";
+  grid-template-columns: 1fr 3fr; /* Giữ nguyên tỷ lệ menu/content */
+  grid-template-rows: 10% 25% 1fr; /* Thêm dòng này để kiểm soát chiều cao */
+  gap: 5px;
+  /* background-color: #2196f3; */
+  /* padding: 5px; */
+  height: 100vh; /* Thêm chiều cao để % có tác dụng */
+}
+
+.custom-container > div {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  padding: 10px;
+}
+
+.custom-container > div.header {
+  grid-area: header;
+  text-align: center;
+}
+
+.custom-container > div.menu {
+  grid-area: menu;
+}
+
+.custom-container > div.content {
+  grid-area: content;
+}
+
+.custom-container > div.table {
+  grid-area: table;
+  overflow: auto; /* Thêm scroll nếu nội dung dài */
+}
