@@ -40,6 +40,8 @@ function App() {
   const [profit_value, setProfit_value] = useState(0);
   const [newCus_value, setNewCus_value] = useState(0);
 
+  const [activeNav, setActiveNav] = useState("dashboard");
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -168,6 +170,8 @@ function App() {
                   href={item.href}
                   logo={item.logo}
                   text={item.text}
+                  isActive={activeNav === item.id}
+                  onClick={() => setActiveNav(item.id)}
                 />
               ))}
             </div>
@@ -222,9 +226,7 @@ function App() {
                         </p>
                       </div>
                       <div className="flex gap-2">
-                        <button
-                          className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer"
-                        >
+                        <button className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer">
                           <div className="flex gap-2">
                             <img src={logo_import} alt="" className="h-6" />
                             <span className="font-bold">Import</span>
@@ -238,10 +240,7 @@ function App() {
                         </button>
                       </div>
                     </div>
-                    <TableComponent
-                      data={orders}
-                      columns={columnsConfig}
-                    />
+                    <TableComponent data={orders} columns={columnsConfig} />
                   </div>
                 </>
               }
