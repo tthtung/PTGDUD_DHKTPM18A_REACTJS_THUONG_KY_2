@@ -21,7 +21,7 @@ import logo_ava from "./assets/images/Avatar 313.png";
 import Card from "./components/Card";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getOrders } from "./api/ordersApi";
+import { getOrders, updateOrder } from "./api/ordersApi";
 import { columnsConfig } from "./data/ordersData";
 import TableComponent from "./components/TableComponent";
 import NavLink from "./components/NavLink";
@@ -70,6 +70,18 @@ function App() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+
+  const handleUpdateOrder = async (orderId, updatedData) => {
+    try {
+      const updatedOrder = await updateOrder(orderId, updatedData);
+      setOrders((prevOrders) =>
+        prevOrders.map((order) => (order.id === orderId ? updatedOrder : order))
+      );
+    } catch (error) {
+      console.error("Failed to update order:", error);
+      throw error;
+    }
+  };
 
   const navItems = [
     {
@@ -240,7 +252,7 @@ function App() {
                         </button>
                       </div>
                     </div>
-                    <TableComponent data={orders} columns={columnsConfig} />
+                    <TableComponent data={orders} columns={columnsConfig} onUpdateOrder={handleUpdateOrder} />
                   </div>
                 </>
               }
@@ -271,7 +283,7 @@ function App() {
                       </button>
                     </div>
                   </div>
-                  <TableComponent data={orders} columns={columnsConfig} />
+                  <TableComponent data={orders} columns={columnsConfig} onUpdateOrder={handleUpdateOrder} />
                 </div>
               }
             />

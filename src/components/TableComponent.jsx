@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { useTable } from "react-table";
 import { FaEdit, FaPlus } from "react-icons/fa";
 import "./TableComponent.css";
+import Modal from "./Modal";
+import EditOrderForm from "./EditOrderForm";
 
-function TableComponent({ columns, data}) {
+function TableComponent({ columns, data, onUpdateOrder }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5; // Số dòng mỗi trang
@@ -16,6 +20,20 @@ function TableComponent({ columns, data}) {
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: paginatedData });
+
+  const handleEditClick = (order) => {
+    setSelectedOrder(order);
+    setIsModalOpen(true);
+  };
+
+  const handleUpdate = async (updatedData) => {
+    try {
+      await onUpdateOrder(selectedOrder.id, updatedData);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error("Update failed:", error);
+    }
+  };
 
   return (
     <div className="table-container">
@@ -54,6 +72,7 @@ function TableComponent({ columns, data}) {
                 <td>
                   <button
                     className="edit-btn"
+                    onClick={() => handleEditClick(row.original)}
                   >
                     <FaEdit />
                   </button>
@@ -97,6 +116,17 @@ function TableComponent({ columns, data}) {
           </button>
         </div>
       </div>
+
+      {/* Edit Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {selectedOrder && (
+          <EditOrderForm
+            order={selectedOrder}
+            onUpdate={handleUpdate}
+            onCancel={() => setIsModalOpen(false)}
+          />
+        )}
+      </Modal>
     </div>
   );
 }
