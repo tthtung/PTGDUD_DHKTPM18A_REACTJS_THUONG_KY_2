@@ -21,7 +21,8 @@ import Card from "./components/Card";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getOrders } from "./api/ordersApi";
-
+import { columnsConfig } from "./data/ordersData";
+import TableComponent from "./components/TableComponent";
 
 function App() {
   const [orders, setOrders] = useState([]);
@@ -48,7 +49,6 @@ function App() {
         console.log("Turnover:", turnover);
         console.log("Profit:", (turnover * 0.6).toFixed(2));
         console.log("New Customer:", (turnover * 0.4).toFixed(2));
-        
       } catch (err) {
         setError(err.message);
       } finally {
@@ -156,7 +156,29 @@ function App() {
             />
           </div>
         </div>
-        <div className="table mt-6">DATATABLE</div>
+        <div className="table mt-6">
+          <div className="flex justify-between">
+            <div className="flex gap-2">
+              <img src={logo_report} alt="" className="h-6" />
+              <p className="font-bold whitespace-nowrap">Detailed report</p>
+            </div>
+            <div className="flex gap-2">
+              <button className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer">
+                <div className="flex gap-2">
+                  <img src={logo_import} alt="" className="h-6" />
+                  <span className="font-bold">Import</span>
+                </div>
+              </button>
+              <button className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer">
+                <div className="flex gap-2">
+                  <img src={logo_export} alt="" className="h-6" />
+                  <span className="font-bold">Export</span>
+                </div>
+              </button>
+            </div>
+          </div>
+          <TableComponent data={[]} columns={columnsConfig} />
+        </div>
       </div>
     </>
   );
