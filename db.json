@@ -1,0 +1,79 @@
+{
+  "orders": [
+    {
+      "customerName": "Elizabeth Lee",
+      "company": "AvatarSystems",
+      "orderValue": "302",
+      "orderDate": "10/07/2023",
+      "status": "New",
+      "avatar": "https://randomuser.me/api/portraits/women/1.jpg",
+      "updatedAt": "2025-04-06T09:10:00.279Z",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "customerName": "Carlos Garcia",
+      "avatar": "https://randomuser.me/api/portraits/men/2.jpg",
+      "company": "SmoozeShift",
+      "orderValue": 747,
+      "orderDate": "24/07/2023",
+      "status": "New"
+    },
+    {
+      "id": "3",
+      "customerName": "Elizabeth Bailey",
+      "avatar": "https://randomuser.me/api/portraits/women/3.jpg",
+      "company": "Prime Time Telecom",
+      "orderValue": 564,
+      "orderDate": "08/08/2023",
+      "status": "In-progress"
+    },
+    {
+      "id": "4",
+      "customerName": "Ryan Brown",
+      "avatar": "https://randomuser.me/api/portraits/men/4.jpg",
+      "company": "OmniTech Corporation",
+      "orderValue": 541,
+      "orderDate": "31/08/2023",
+      "status": "In-progress"
+    },
+    {
+      "id": "5",
+      "customerName": "Ryan Young",
+      "avatar": "https://randomuser.me/api/portraits/men/5.jpg",
+      "company": "DataStream Inc.",
+      "orderValue": 769,
+      "orderDate": "01/05/2023",
+      "status": "Completed"
+    },
+    {
+      "id": "6",
+      "customerName": "Hailey Adams",
+      "avatar": "https://randomuser.me/api/portraits/women/6.jpg",
+      "company": "FlowRush",
+      "orderValue": 922,
+      "orderDate": "10/06/2023",
+      "status": "Completed"
+    },
+    {
+      "customerName": "Tùng",
+      "company": "TTT",
+      "orderValue": "300",
+      "orderDate": "2025-04-06",
+      "status": "New",
+      "avatar": "https://randomuser.me/api/portraits/men/71.jpg",
+      "updatedAt": "2025-04-09T06:48:32.143Z",
+      "id": "dbf6"
+    },
+    {
+      "customerName": "Tùng",
+      "company": "KKKK",
+      "orderValue": "1222",
+      "orderDate": "2025-04-09",
+      "status": "New",
+      "avatar": "https://randomuser.me/api/portraits/men/71.jpg",
+      "updatedAt": "2025-04-09T07:01:02.487Z",
+      "id": "cd96"
+    }
+  ]
+}
