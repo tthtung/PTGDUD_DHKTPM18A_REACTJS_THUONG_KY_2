@@ -177,7 +177,7 @@ function App() {
               </button>
             </div>
           </div>
-          <TableComponent data={[]} columns={columnsConfig} />
+          <TableComponent data={orders} columns={columnsConfig} />
         </div>
       </div>
     </>
