@@ -74,6 +74,17 @@
       "avatar": "https://randomuser.me/api/portraits/men/71.jpg",
       "updatedAt": "2025-04-09T07:01:02.487Z",
       "id": "cd96"
+    },
+    {
+      "id": "464d",
+      "customerName": "Tùng",
+      "company": "TTT",
+      "orderValue": "300",
+      "orderDate": "2025-04-10",
+      "status": "Completed",
+      "avatar": "https://randomuser.me/api/portraits/men/71.jpg",
+      "createdAt": "2025-04-10T14:58:27.308Z",
+      "updatedAt": "2025-04-10T14:58:27.308Z"
     }
   ]
 }

@@ -21,7 +21,7 @@ import logo_ava from "./assets/images/Avatar 313.png";
 import Card from "./components/Card";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getOrders, updateOrder } from "./api/ordersApi";
+import { createOrder, getOrders, updateOrder } from "./api/ordersApi";
 import { columnsConfig } from "./data/ordersData";
 import TableComponent from "./components/TableComponent";
 import NavLink from "./components/NavLink";
@@ -31,6 +31,8 @@ import Analytics from "./pages/Analytics";
 import Messages from "./pages/Messages";
 import Integrations from "./pages/Integrations";
 import Teams from "./pages/Teams";
+import Modal from "./components/Modal";
+import AddOrderForm from "./components/AddOrderForm";
 
 function App() {
   const [orders, setOrders] = useState([]);
@@ -41,6 +43,8 @@ function App() {
   const [newCus_value, setNewCus_value] = useState(0);
 
   const [activeNav, setActiveNav] = useState("dashboard");
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -106,6 +110,29 @@ function App() {
       text: "Integrations",
     },
   ];
+  const handleAddOrder = async (newOrder) => {
+    try {
+      const addedOrder = await createOrder(newOrder);
+      setOrders((prevOrders) => [...prevOrders, addedOrder]);
+      return addedOrder; // Trả về order mới tạo
+    } catch (error) {
+      console.error("Failed to add order:", error);
+      throw error; // Ném lỗi để xử lý ở component con
+    }
+  };
+
+  const handleAddO = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const handleAdd = async (newData) => {
+    try {
+      await handleAddOrder(newData);
+      setIsAddModalOpen(false);
+    } catch (error) {
+      console.error("Add failed:", error);
+    }
+  };
 
   return (
     <>
@@ -238,7 +265,10 @@ function App() {
                         </p>
                       </div>
                       <div className="flex gap-2">
-                        <button className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer">
+                        <button
+                          className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer"
+                          onClick={handleAddO}
+                        >
                           <div className="flex gap-2">
                             <img src={logo_import} alt="" className="h-6" />
                             <span className="font-bold">Import</span>
@@ -252,7 +282,11 @@ function App() {
                         </button>
                       </div>
                     </div>
-                    <TableComponent data={orders} columns={columnsConfig} onUpdateOrder={handleUpdateOrder} />
+                    <TableComponent
+                      data={orders}
+                      columns={columnsConfig}
+                      onUpdateOrder={handleUpdateOrder}
+                    />
                   </div>
                 </>
               }
@@ -269,7 +303,10 @@ function App() {
                       </p>
                     </div>
                     <div className="flex gap-2 mb-2">
-                      <button className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer">
+                      <button
+                        className="p-2 border-1 rounded-md border-pink-400 text-pink-400 bg-white cursor-pointer"
+                        onClick={handleAddO}
+                      >
                         <div className="flex gap-2">
                           <img src={logo_import} alt="" className="h-6" />
                           <span className="font-bold">Import</span>
@@ -283,7 +320,11 @@ function App() {
                       </button>
                     </div>
                   </div>
-                  <TableComponent data={orders} columns={columnsConfig} onUpdateOrder={handleUpdateOrder} />
+                  <TableComponent
+                    data={orders}
+                    columns={columnsConfig}
+                    onUpdateOrder={handleUpdateOrder}
+                  />
                 </div>
               }
             />
@@ -294,6 +335,13 @@ function App() {
             <Route path="/integrations" element={<Integrations />} />
           </Routes>
         </div>
+        {/* Add New Order Modal */}
+        <Modal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)}>
+          <AddOrderForm
+            onAdd={handleAdd}
+            onCancel={() => setIsAddModalOpen(false)}
+          />
+        </Modal>
       </Router>
     </>
   );
